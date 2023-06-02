@@ -17,13 +17,13 @@ const commentContainerEl = document.querySelector("#comments-container")
 const recipientInputEl = document.querySelector("#recipient-input")
 const senderInputEl = document.querySelector("#sender-input")
 
-onValue(commentsInDB, (snapshot) => {
+onValue(commentsInDB, snapshot => {
     if(snapshot.exists()) {
         clearComments()
         let arrayItems = Object.entries(snapshot.val())
         for(let i = 0; i < arrayItems.length; i++) {
             let currentItem = arrayItems[i]
-            // addNewComment(currentItemValue)
+            addNewComment(currentItemValue)
             //console.log(currentItem)
         }
     } else {
@@ -32,7 +32,7 @@ onValue(commentsInDB, (snapshot) => {
 
 })
 
-submitBtnEl.addEventListener('click', function(){
+submitBtnEl.addEventListener('click', () => {
     let dataObject = {
         comment: inputFieldEl.value,
         recipient: recipientInputEl.value,
@@ -41,16 +41,12 @@ submitBtnEl.addEventListener('click', function(){
     addCommentToDB(dataObject)
 })
 
-function addCommentToDB(obj) {
-    push(commentsInDB, obj)
-}
+const addCommentToDB = obj => push(commentsInDB, obj)
 
-function addNewComment(text) {
+const addNewComment = text =>
     commentContainerEl.innerHTML += `
     <section class="comment"><p>${text}</p></section
     `
-}
 
-function clearComments() {
-    commentContainerEl.innerHTML = ""
-}
+const clearComments = () => commentContainerEl.innerHTML = ""
+
