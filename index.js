@@ -40,6 +40,7 @@ submitBtnEl.addEventListener('click', () => {
         sender: senderInputEl.value
 }
     addCommentToDB(dataObject)
+    clearAllInputs()
 })
 
 const addCommentToDB = obj => push(commentsInDB, obj)
@@ -55,3 +56,8 @@ const addNewComment = (recipient, text, sender) =>
 
 const clearComments = () => commentContainerEl.innerHTML = ""
 
+const clearAllInputs = () => {
+    inputFieldEl.value = ""
+    recipientInputEl.value = ""
+    senderInputEl.value = ""
+}
